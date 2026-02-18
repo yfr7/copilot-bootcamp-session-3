@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Paper, Typography, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Paper, Typography, Box, ToggleButton, ToggleButtonGroup, FormControl } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -148,22 +148,40 @@ function TaskForm({ onSave, initialTask }) {
           }}
         />
         <FormControl fullWidth size="small">
-          <InputLabel id="priority-label">Priority</InputLabel>
-          <Select
-            labelId="priority-label"
-            id="task-priority"
+          <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>Priority</Typography>
+          <ToggleButtonGroup
             value={priority}
-            label="Priority"
-            onChange={e => setPriority(e.target.value)}
+            exclusive
+            onChange={(e, val) => { if (val) setPriority(val); }}
             data-testid="priority-select"
-            sx={{
-              borderRadius: 2,
-            }}
+            fullWidth
+            size="small"
           >
-            <MenuItem value="P1">P1</MenuItem>
-            <MenuItem value="P2">P2</MenuItem>
-            <MenuItem value="P3">P3</MenuItem>
-          </Select>
+            {['P1', 'P2', 'P3'].map((p) => (
+              <ToggleButton
+                key={p}
+                value={p}
+                className={priority === p ? 'priority-selected' : 'priority-unselected'}
+                sx={{
+                  fontWeight: 600,
+                  backgroundColor: priority === p ? '#07F2E6' : '#7A7A7A',
+                  color: 'white',
+                  '&.Mui-selected': {
+                    backgroundColor: '#07F2E6',
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: '#06d9ce',
+                    },
+                  },
+                  '&:hover': {
+                    backgroundColor: priority === p ? '#06d9ce' : '#8a8a8a',
+                  },
+                }}
+              >
+                {p}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
         </FormControl>
         {error && <Typography color="error" sx={{ fontWeight: 500, fontSize: '0.875rem' }}>{error}</Typography>}
         <Box display="flex" gap={2}>
