@@ -14,7 +14,12 @@ function App() {
       await fetch(`/api/tasks/${editingTask.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(task)
+        body: JSON.stringify({
+          title: task.title,
+          description: task.description,
+          due_date: task.due_date,
+          priority: task.priority,
+        })
       });
       setEditingTask(null);
     } else {
@@ -22,7 +27,12 @@ function App() {
       await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(task)
+        body: JSON.stringify({
+          title: task.title,
+          description: task.description,
+          due_date: task.due_date,
+          priority: task.priority,
+        })
       });
     }
     setRefreshKey(k => k + 1);

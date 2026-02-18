@@ -92,3 +92,19 @@ li:last-child {
   color: #d32f2f;
   font-weight: bold;
 }
+
+/* Priority color classes */
+.priority-p1 {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+.priority-p2 {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
+
+.priority-p3 {
+  background-color: #9e9e9e !important;
+  color: white !important;
+}

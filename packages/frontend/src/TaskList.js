@@ -5,6 +5,13 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
+import FlagIcon from '@mui/icons-material/Flag';
+
+const PRIORITY_COLORS = {
+  P1: '#f44336',
+  P2: '#ff9800',
+  P3: '#9e9e9e',
+};
 
 function TaskList({ onEdit }) {
   const [tasks, setTasks] = useState([]);
@@ -213,6 +220,24 @@ function TaskList({ onEdit }) {
                     fontSize: '0.7rem',
                     fontWeight: 500,
                     background: 'linear-gradient(135deg, #ff9800 0%, #ff6f00 100%)',
+                    color: 'white',
+                    '& .MuiChip-icon': {
+                      color: 'white'
+                    }
+                  }}
+                />
+              )}
+              {task.priority && (
+                <Chip
+                  icon={<FlagIcon sx={{ fontSize: 14 }} />}
+                  label={task.priority}
+                  size="small"
+                  className={`priority-${task.priority.toLowerCase()}`}
+                  sx={{
+                    height: 20,
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    backgroundColor: PRIORITY_COLORS[task.priority] || '#9e9e9e',
                     color: 'white',
                     '& .MuiChip-icon': {
                       color: 'white'
